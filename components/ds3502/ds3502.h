@@ -34,5 +34,17 @@ class DS3502Output : public output::FloatOutput, public Component {
   DS3502Component *parent_{nullptr};
 };
 
+class DS3502Sensor : public sensor::Sensor, public PollingComponent {
+ public:
+  void set_parent(DS3502Component *parent) { parent_ = parent; }
+
+  void setup() override;
+  void update() override;
+  void dump_config() override;
+
+protected:
+  DS3502Component *parent_{nullptr};
+};
+
 }  // namespace ds3502
 }  // namespace esphome
