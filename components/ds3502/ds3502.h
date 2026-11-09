@@ -2,6 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/output/float_output.h"
+#include "esphome/components/sensor/sensor.h"
 #include "esphome/components/i2c/i2c.h"
 
 namespace esphome {
