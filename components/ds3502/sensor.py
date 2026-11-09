@@ -13,10 +13,10 @@ CONFIG_SCHEMA = sensor.sensor_schema(DS3502Sensor).extend({
     cv.Required(CONF_ID): cv.declare_id(DS3502Sensor),
 }).extend(cv.polling_component_schema('60s'))
 
-def to_code(config):
+async to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    yield cg.register_component(var, config)
-    yield sensor.register_sensor(var, config)
+    await cg.register_component(var, config)
+    await sensor.register_sensor(var, config)
     
     parent = await cg.get_variable(config[CONF_DS3502_ID])
     cg.add(var.set_parent(parent))
