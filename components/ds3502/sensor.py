@@ -8,7 +8,7 @@ DS3502Sensor = ds3502_ns.class_('DS3502Sensor', cg.PollingComponent)
 
 CONF_DS3502_ID = "ds3502_id"
 
-CONFIG_SCHEMA = sensor.sensor_schema(UNIT_EMPTY, ICON_EMPTY, 1).extend({
+CONFIG_SCHEMA = sensor.sensor_schema(DS3502Sensor).extend({
     cv.Required(CONF_DS3502_ID): cv.use_id(DS3502Component),
     cv.Required(CONF_ID): cv.declare_id(DS3502Sensor),
 }).extend(cv.polling_component_schema('60s'))
