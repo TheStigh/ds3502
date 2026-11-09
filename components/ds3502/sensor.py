@@ -17,3 +17,6 @@ def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     yield cg.register_component(var, config)
     yield sensor.register_sensor(var, config)
+    
+    parent = await cg.get_variable(config[CONF_DS3502_ID])
+    cg.add(var.set_parent(parent))
