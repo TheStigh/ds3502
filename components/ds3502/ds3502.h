@@ -2,6 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/output/float_output.h"
+#include "esphome/components/sensor/sensor.h"
 #include "esphome/components/i2c/i2c.h"
 
 namespace esphome {
@@ -31,6 +32,18 @@ class DS3502Output : public output::FloatOutput, public Component {
   
  protected:
   void write_state(float state) override;
+  DS3502Component *parent_{nullptr};
+};
+
+class DS3502Sensor : public sensor::Sensor, public PollingComponent {
+ public:
+  void set_parent(DS3502Component *parent) { parent_ = parent; }
+
+  void setup() override;
+  void update() override;
+  void dump_config() override;
+
+protected:
   DS3502Component *parent_{nullptr};
 };
 
