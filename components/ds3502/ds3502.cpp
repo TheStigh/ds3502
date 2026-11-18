@@ -74,5 +74,30 @@ void DS3502Output::write_state(float state) {
   this->parent_->set_wiper(wiper_value);
 }
 
+
+
+void DS3502Sensor::setup() {
+  if (this->parent_ == nullptr) {
+    ESP_LOGE(TAG, "DS3502Sensor parent not set!");
+    this->mark_failed();
+    return;
+  }
+  
+  ESP_LOGCONFIG(TAG, "Setting up DS3502 output");
+}
+
+void DS3502Sensor::dump_config() {
+  ESP_LOGCONFIG(TAG, "DS3502 Sensor:");
+  ESP_LOGCONFIG(TAG, "  Component parent %s", this->parent_ ? "set" : "NOT SET");
+}
+
+void DS3502Sensor::update() {
+  if (this->parent_ == nullptr) {
+    ESP_LOGW(TAG, "No parent set for DS3502Input!");
+    return;
+  }
+  this->publish_state(this->parent_->get_wiper());
+}
+
 }  // namespace ds3502
 }  // namespace esphome
